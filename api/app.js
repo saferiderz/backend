@@ -4,8 +4,11 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 // const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 // const testAPIRouter = require('./routes/testAPI');
+
+// Routes end point
+const usersRouter = require('./routes/users');
+
 // var mysql = require('mysql');
 // var connection = mysql.createConnection("mysql://q6f44dcrlbgg1dyb:kwkzra83yi7hkvrc@lg7j30weuqckmw07.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/zz0jcra8qbl5gpvk");
 const app = express();
@@ -14,17 +17,6 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
-// app.set('view engine', 'jade');
-
-
-// connection.connect();
-
-// connection.query('show tables', function(err, rows, fields) {
-//   if (err) throw err;
-
-//   console.log('The solution is: ', rows);
-// });
 
 // app.use('/', indexRouter);
 app.use('/', usersRouter);
