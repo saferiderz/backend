@@ -8,16 +8,9 @@ router.get('/', function(req, res, next) {
 
 /* GET users listing. */
 router.get('/users', function(req, res, next) {
-  //TODO: Implement Getting user logic
-  res.send('respond with a resourcesss');
-});
-
-
-router.get('/login', function (req, res, next) {
-  res.json({
-      username: "streetuser1",
-      password: 123,
-
+  pool.query('SELECT * FROM user', (error, result) => {
+    if (error) throw error;
+    res.send(result);
   });
 });
 
