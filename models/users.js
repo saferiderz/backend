@@ -1,3 +1,4 @@
+'use strict';
 function Users (sequelize, DataTypes) {
 	let Users = sequelize.define("Users", {
 		// Giving the users model a name of type STRING
@@ -28,7 +29,8 @@ function Users (sequelize, DataTypes) {
 		// Associating issues with users
 		// When a user is deleted, also delete any associated issues
 		Users.hasMany(models.Issues, {
-			onDelete: "cascade"
+			onDelete: "cascade",
+			
 		});
 	};
 
