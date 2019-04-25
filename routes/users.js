@@ -6,6 +6,7 @@ router.get('/', function(req, res, next) {
   res.send('User endpoint');
 });
 
+//User Routes
 /* GET users listing. */
 router.get('/users', function(req, res, next) {
   pool.query('SELECT * FROM user', (error, result) => {
@@ -54,5 +55,13 @@ router.delete('/users/:id', (request, response) => {
       response.send('User deleted.');
   });
 });
+
+//Issues 
+// router.get('/issues', function(req, res, next) {
+//   pool.query('SELECT * FROM user', (error, result) => {
+//     if (error) throw error;
+//     res.send(result);
+//   });
+// });
 
 module.exports = router;
