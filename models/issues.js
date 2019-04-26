@@ -21,7 +21,7 @@ function Issues(sequelize, DataTypes) {
             allowNull: true
         },
         latitude: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.DECIMAL(10,8),
             allowNull: true,
             defaultValue: null,
             validate: {
@@ -29,7 +29,7 @@ function Issues(sequelize, DataTypes) {
             }
         },
         longitude: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.DECIMAL(11,8),
             allowNull: true,
             defaultValue: null,
             validate: {
