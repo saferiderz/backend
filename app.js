@@ -8,6 +8,7 @@ const logger = require('morgan');
 
 // Routes end point
 const usersRouter = require('./routes/users');
+const issuesRouter = require('./routes/issues');
 
 // var mysql = require('mysql');
 // var connection = mysql.createConnection("mysql://q6f44dcrlbgg1dyb:kwkzra83yi7hkvrc@lg7j30weuqckmw07.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/zz0jcra8qbl5gpvk");
@@ -20,6 +21,7 @@ app.use(cookieParser());
 
 // app.use('/', indexRouter);
 app.use('/', usersRouter);
+app.use('/issues' , issuesRouter);
 // app.use('/testAPI', testAPIRouter);
 
 // catch 404 and forward to error handler
