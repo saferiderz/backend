@@ -1,0 +1,2 @@
+sequelize model:create --name Users --attributes username:string,password:string
+sequelize model:create --name Issues --attributes issueType:string,comment:string,address:string,lat:DECIMAL,lon:DECIMAL
