@@ -3,7 +3,7 @@ const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 //for server
-const http = require('http');
+
 //Set up the express app
 const app = express();
 //Set port 
@@ -28,7 +28,7 @@ models.sequelize.sync().then(function() {
 //Require our routes into the application
 require('./routes')(app);
 //default catch-all route that send back a welcome message
-app.get('*', (req, res) => res.status(200).send({
+app.get('/api/users', (req, res) => res.status(200).send({
     message: 'Welcome to the beginning of nothingness.',
   }));
 module.exports = app;
