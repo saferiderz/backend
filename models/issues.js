@@ -46,11 +46,11 @@ module.exports = (sequelize, DataTypes) => {
           }
       }
   });
-  Issues.associate = function(models) {
-    // associations can be defined here
-    Issues.belongsTo(models.Users, {
+//   Issues.associate = function(models) {
+//     // associations can be defined here
+//     Issues.belongsTo(models.Users, {
       
-    })
-  };
+//     })
+//   };
   return Issues;
 };
