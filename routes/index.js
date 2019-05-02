@@ -1,5 +1,5 @@
 const usersController = require('../controllers/users');
-
+const issuesController = require('../controllers/issues');
 module.exports = (app) => {
 
     app.get('/api', (req, res) => res.status(200).send({
@@ -14,7 +14,7 @@ app.put('/api/users/:usersId', usersController.update);
 app.delete('/api/users/:usersId', usersController.destroy);
 
 //issues CRUD routes
-app.post('/api/issues/create', usersController.create)
+app.post('/api/issues/create', issuesController.create)
 app.get('/api/issues', issuesController.getAll);
 app.get('/api/issues/:issuesId', issuesController.retrieve);
 app.put('/api/issues/:issuesId', issuesController.update);

@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       }
   },
   address: {
-      type: DataTypes.String,
+      type: DataTypes.STRING,
       allowNull: true
   },
   latitude: {

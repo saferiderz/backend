@@ -14,7 +14,7 @@ module.exports = {
      create(req, res) {
         return Issues
           .create({
-            name: req.body.name,
+            issueType: req.body.issueType,
           })
           .then(issues => res.status(201).send(issues))
           .catch(error => res.status(400).send(error));
