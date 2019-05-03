@@ -2,18 +2,22 @@ const db =require('../models');
 
 module.exports = {
 
-    //Get all issues
+    //Get all issuesf
     getAll(req, res) {
-        db.Issues.findAll()
-          .then((issues) => res.json(db))
-          .catch((error) => res.status(400).send(error));
+      db.Issues.findAll()
+      .then((db)=> res.json(db))
+      .catch((error) => res.status(400).send(error));
       },
 
      // Create newIssues
      create(req, res) {
-        return Issues
-          .create({
+        db.Issues.create({
             issueType: req.body.issueType,
+            comment: req.body.comment,
+            address: req.body.address,
+            lat: req.body.lat,
+            lon: req.body.lon
+
             
           })
           .then(issues => res.status(201).send(issues))
@@ -21,8 +25,7 @@ module.exports = {
       },
        //Find By ID
        retrieve(req, res) {
-        return Issues
-          .findByPk(req.params.IssuesId)
+        db.Issues.findOne(req.params.id)
           .then((issues) => {
             if (!issues) {
               return res.status(404).send({

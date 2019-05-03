@@ -4,24 +4,24 @@ module.exports = (sequelize, DataTypes) => {
     issueType: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-          // will ensure that the issue submitted is one of our predefined issue types
-          isIn: [['pothole', 'blocked', 'vehicle', 'debris', 'hazard', 'traffic']]
-      }
+    //   validate: {
+    //       // will ensure that the issue submitted is one of our predefined issue types
+    //       isIn: [['pothole', 'blocked', 'vehicle', 'debris', 'hazard', 'traffic']]
+    //   }
   },
-  comment: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      validate: {
-          // comment must be at least one character long to prevent blank comments
-          len: [1]
-      }
-  },
-  address: {
-      type: DataTypes.STRING,
-      allowNull: true
-  },
-  latitude: {
+//   comment: {
+//       type: DataTypes.STRING,
+//       allowNull: true,
+//       validate: {
+//           // comment must be at least one character long to prevent blank comments
+//           len: [1]
+//       }
+//   },
+//   address: {
+//       type: DataTypes.STRING,
+//       allowNull: true
+//   },
+  lat: {
       type: DataTypes.DECIMAL(10,8),
       allowNull: true,
       defaultValue: null,
@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
           min: -90, max: 90
       }
   },
-  longitude: {
+  lon: {
       type: DataTypes.DECIMAL(11,8),
       allowNull: true,
       defaultValue: null,
@@ -38,13 +38,13 @@ module.exports = (sequelize, DataTypes) => {
       }
   },
 }, {
-      validate: {
-          bothCoordsOrNone() {
-              if (((this.latitude === null) !== (this.longitude === null)) || ((this.latitude === null) && (this.longitude === null) && (this.address === null)) || ((this.latitude !== null) && (this.longitude !== null) && (this.address !== null))){
-                  throw new Error('Require either both latitude and longitude or neither. If neither, require an address. Cannot have both an address and latitude and longitude')
-              }
-          }
-      }
+    //   validate: {
+    //       bothCoordsOrNone() {
+    //           if (((this.latitude === null) !== (this.longitude === null)) || ((this.latitude === null) && (this.longitude === null) && (this.address === null)) || ((this.latitude !== null) && (this.longitude !== null) && (this.address !== null))){
+    //               throw new Error('Require either both latitude and longitude or neither. If neither, require an address. Cannot have both an address and latitude and longitude')
+    //           }
+    //       }
+    //   }
   });
 //   Issues.associate = function(models) {
 //     // associations can be defined here

@@ -1,6 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define('Users', {
+    //TODO: add in first name, lastname, and email(with sequelize validation)
     username: {
 			type: DataTypes.STRING,
             allowNull: false,
@@ -24,14 +25,14 @@ module.exports = (sequelize, DataTypes) => {
         
 	});
 
-  Users.associate = function(models) {
-    // associations can be defined here
-    Users.hasMany(models.Issues, {
-      // foreignKey: 'userId',
-      as: 'issues',
-      onDelete: "cascade"
-    });
+  // Users.associate = function(models) {
+  //   // associations can be defined here
+  //   Users.hasMany(models.Issues, {
+  //     // foreignKey: 'userId',
+  //     as: 'issues',
+  //     onDelete: "cascade"
+  //   });
 
-  };
+  // };
   return Users;
 };
