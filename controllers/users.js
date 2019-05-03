@@ -20,7 +20,8 @@ module.exports = {
         // (user => res.status(201).send(users))
         .catch(error => res.status(400).send(error));
 
-    },
+
+      },
      //Find By ID
      retrieve(req, res) {
         db.Users.findOne({
