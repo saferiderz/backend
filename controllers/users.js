@@ -1,4 +1,7 @@
+const bcrypt = require('../helpers/bcrypt');
 const Users = require('../models').Users;
+const jwt = require('jsonwebtoken');
+
 
 module.exports = {
     //get all users
@@ -9,16 +12,46 @@ module.exports = {
         .catch((error) => res.status(400).send(error));
     },
     //create new user
-    create(req, res) {
-        return Users
-        .create({
-            username: req.body.username,
-            password: req.body.password
-        })
-        .then(user => res.status(201).send(users))
-        .catch(error => res.status(400).send(error));
+    // create(req, res) {
+    //     return Users
+    //     .create({
+    //         username: req.body.username,
+    //         password: req.body.password
+    //     })
+    //     .then(user => res.status(201).send(users))
+    //     .catch(error => res.status(400).send(error));
 
+    // },
+
+    create(req,response) {
+      bcrypt.newPass(req.body.password).then(function(res) {
+        if (res.status === 200) {
+          return Users
+          .create({
+            email: req.body.email,
+            password: res.passwordHash,
+            firstname: req.body.firstname,
+            lastname: req.body.lastname
+          }).then(newUserData => {
+            if (res.status === 200) {
+              jwt.sign({ newUserData }, "secretkey", (err, token) => {
+                return response
+                  .status(200)
+                  .json({
+                    token,
+                    username: newUserData.username
+                  })
+              });
+            } else {
+              return response.status(404).json({ message: "Failed at line 44" });
+            }
+          });
+        } else {
+          response.json({ error: "Something Went Wrong 48" });
+        }
+      });
     },
+
      //Find By ID
      retrieve(req, res) {
         return Users
