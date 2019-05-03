@@ -1,46 +1,53 @@
-const Users = require('../models').Users;
+const db = require('../models');
 
 module.exports = {
     //get all users
     getAll(req, res) {
-        return Users
-        .findAll()
-        .then((User)=> res.status(200).send(users))
+       db.Users.findAll()
+        .then((db)=> res.json(db))
         .catch((error) => res.status(400).send(error));
     },
     //create new user
     create(req, res) {
-        return Users
-        .create({
+    
+         db.Users.create({
             username: req.body.username,
             password: req.body.password
         })
-        .then(user => res.status(201).send(users))
+        .then(function(db){
+          res.json(db)
+        })
+        // (user => res.status(201).send(users))
         .catch(error => res.status(400).send(error));
 
     },
      //Find By ID
      retrieve(req, res) {
-        return Users
-          .findByPk(req.params.userId)
-          .then((users) => {
-            if (!users) {
-              return res.status(404).send({
-                message: 'User Not Found',
-              });
-            }
-            return res.status(200).send(users);
-          })
+        db.Users.findOne({
+          where:{
+          id: req.params.id
+          }
+        })
+          .then(function(db){
+            res.json(db)
+          // res.status(200).send(users);
+        })
+            // if (!users) {
+            //   return res.status(404).send({
+            //     message: 'User Not Found',
+            //   });
+            // }
+           
           .catch((error) => res.status(400).send(error));
       },
-      // Update a list
+      // Update a User
       update(req, res) {
         return Users
           .findByPk(req.params.userId)
           .then(users => {
             if (!users) {
               return res.status(404).send({
-                message: 'List Not Found',
+                message: 'User Not Found',
               });
             }
             return users

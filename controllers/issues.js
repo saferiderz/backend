@@ -1,12 +1,11 @@
-const Issues =require('../models').Issues;
+const db =require('../models');
 
 module.exports = {
 
     //Get all issues
     getAll(req, res) {
-        return Issues
-          .findAll()
-          .then((issues) => res.status(200).send(issues))
+        db.Issues.findAll()
+          .then((issues) => res.json(db))
           .catch((error) => res.status(400).send(error));
       },
 
@@ -15,6 +14,7 @@ module.exports = {
         return Issues
           .create({
             issueType: req.body.issueType,
+            
           })
           .then(issues => res.status(201).send(issues))
           .catch(error => res.status(400).send(error));
