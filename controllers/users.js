@@ -16,6 +16,7 @@ module.exports = {
         db.Users.create({
           firstname: req.body.firstname,
           lastname: req.body.lastname,
+          email: req.body.email,
           username: req.body.username,
           password: res.passwordHash
         }).then(newUserData => {
@@ -27,6 +28,7 @@ module.exports = {
                   token,
                   firstname: newUserData.firstname,
                   lastname: newUserData.lastname,
+                  email: req.body.email,
                   username: newUserData.username,
                   password: newUserData.password
                 })
