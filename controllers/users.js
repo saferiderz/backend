@@ -10,24 +10,6 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },
   //create new user
-<<<<<<< HEAD
-  create(req, res) {
-
-    db.Users.create({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      username: req.body.username,
-      password: req.body.password
-    })
-      .then(function (db) {
-        res.json(db)
-      })
-      // (user => res.status(201).send(users))
-      .catch(error => res.status(400).send(error));
-
-
-=======
   create(req,response) {
     bcrypt.newPass(req.body.password).then(function(res) {
       if (res.status === 200) {
@@ -57,7 +39,6 @@ module.exports = {
         response.json({ error: "Something Went Wrong 48" });
       }
     });
->>>>>>> d61de47b125fda11cef53b3be43c2f9d1b7b0154
   },
   
   //Find By ID
