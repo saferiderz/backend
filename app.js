@@ -1,41 +1,35 @@
 const createError = require('http-errors');
 const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-// const indexRouter = require('./routes/index');
-// const testAPIRouter = require('./routes/testAPI');
+const bodyParser = require('body-parser');
+//for server
 
-// Routes end point
-const usersRouter = require('./routes/users');
-
-// var mysql = require('mysql');
-// var connection = mysql.createConnection("mysql://q6f44dcrlbgg1dyb:kwkzra83yi7hkvrc@lg7j30weuqckmw07.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/zz0jcra8qbl5gpvk");
+//Set up the express app
 const app = express();
-
+//Set port 
+// This will be our application entry. We'll setup our server here.
+const http = require('http');
+const port = parseInt(process.env.PORT, 10) || 8000;
+app.set('port', port);
+const server = http.createServer(app);
+server.listen(port);
+// Log requests to the console
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-
-// app.use('/', indexRouter);
-app.use('/', usersRouter);
-// app.use('/testAPI', testAPIRouter);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+//Parse incoming data requests
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+const models =require('./models');
+//Sync Database
+models.sequelize.sync().then(function() {
+    console.log('Nice! Database looks fine');
+}).catch(function(err) {
+    console.log(err, "Something went wrong with the Database Update!");
 });
-
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
-
+//Require our routes into the application
+require('./routes')(app);
+//default catch-all route that send back a welcome message
+app.get('/api/users', (req, res) => res.status(200).send({
+    message: 'Welcome to the beginning of nothingness.',
+  }));
 module.exports = app;
+  
