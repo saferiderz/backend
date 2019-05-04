@@ -1,7 +1,27 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define('Users', {
-    //TODO: add in first name, lastname, and email(with sequelize validation)
+    //TODO: add in email(with sequelize validation)
+    firstname: {
+			type: DataTypes.STRING,
+            allowNull: false,
+            // hard coding in 'Thomas' for folks who want to continue on as a guest without creating an account
+            defaultValue: 'Thomas',
+			validate: {
+                //firstname must be at least 1 character long
+				len: [1]
+			}
+    },
+    lastname: {
+			type: DataTypes.STRING,
+            allowNull: false,
+            // hard coding in 'Paine' for folks who want to continue on as a guest without creating an account
+            defaultValue: 'Paine',
+			validate: {
+                //lastname must be at least 5 character long
+				len: [1]
+			}
+		},
     username: {
 			type: DataTypes.STRING,
             allowNull: false,
