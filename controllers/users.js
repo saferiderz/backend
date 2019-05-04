@@ -3,7 +3,7 @@ const db = require('../models');
 module.exports = {
   //get all users
   getAll(req, res) {
-    db.Users.findAll()
+    db.Users.findAll({})
       .then((db) => res.json(db))
       .catch((error) => res.status(400).send(error));
   },
@@ -11,6 +11,9 @@ module.exports = {
   create(req, res) {
 
     db.Users.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
       username: req.body.username,
       password: req.body.password
     })
