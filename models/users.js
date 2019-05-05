@@ -2,13 +2,13 @@
 module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define('Users', {
     //TODO: add in first name, lastname, and email(with sequelize validation)
-    firstName: {
+    firstname: {
       type: DataTypes.STRING,
       allowNull: false,
       // hard coding in 'anonymousUser' for folks who want to continue on as a guest without creating an account
       defaultValue: 'anonymousFirstName'
     },
-    lastName: {
+    lastname: {
       type: DataTypes.STRING,
       allowNull: false,
       // hard coding in 'anonymousUser' for folks who want to continue on as a guest without creating an account
