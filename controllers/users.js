@@ -28,7 +28,7 @@ module.exports = {
                   token,
                   firstname: newUserData.firstname,
                   lastname: newUserData.lastname,
-                  email: req.body.email,
+                  email: newUserData.email,
                   username: newUserData.username,
                   password: newUserData.password
                 })
