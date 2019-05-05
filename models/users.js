@@ -2,11 +2,11 @@
 module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define('Users', {
     //TODO: add in first name, lastname, and email(with sequelize validation)
-    firstname: {
+    firstName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    lastname: {
+    lastName: {
       type: DataTypes.STRING,
       allowNull: false,
     },

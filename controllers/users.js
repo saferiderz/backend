@@ -14,8 +14,8 @@ module.exports = {
     bcrypt.newPass(req.body.password).then(function(res) {
       if (res.status === 200) {
         db.Users.create({
-          firstname: req.body.firstname,
-          lastname: req.body.lastname,
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
           email: req.body.email,
           username: req.body.username,
           password: res.passwordHash
@@ -26,8 +26,8 @@ module.exports = {
                 .status(200)
                 .json({
                   token,
-                  firstname: newUserData.firstname,
-                  lastname: newUserData.lastname,
+                  firstName: newUserData.firstName,
+                  lastName: newUserData.lastName,
                   email: newUserData.email,
                   username: newUserData.username,
                   password: newUserData.password
