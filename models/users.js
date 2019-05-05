@@ -1,11 +1,12 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define('Users', {
-    firstName: {
+    //TODO: add in first name, lastname, and email(with sequelize validation)
+    firstname: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    lastName: {
+    lastname: {
       type: DataTypes.STRING,
       allowNull: false,
     },
