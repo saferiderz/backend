@@ -9,6 +9,35 @@ module.exports = {
       .then((db) => res.json(db))
       .catch((error) => res.status(400).send(error));
   },
+  //sign in user
+  signin(req,response) {
+    db.User.findOne({
+      where: {
+        username: req.body.username
+      }
+    }).then(user => {
+      bcrypt
+        .checkPass(req.body.password, user.password)
+        .then(res => {
+          if (res.status === 200) {
+            jwt.sign({ user }, "secretkey", (err, token) => {
+              return response
+                .status(200)
+                .json({ token })
+                .redirect("/");
+            });
+            //TODO write code for storing and checking cookies
+          } else {
+            return response
+              .status(500)
+              .json("Something went wrong");
+          }
+        })
+        .catch(error => {
+          respose.json(error);
+        });
+    });
+  },
   //create new user
   create(req,response) {
     bcrypt.newPass(req.body.password).then(function(res) {
