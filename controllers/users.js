@@ -9,6 +9,47 @@ module.exports = {
       .then((db) => res.json(db))
       .catch((error) => res.status(400).send(error));
   },
+  //sign in user
+  signin(req,response) {
+    db.Users.findOne({
+      where: {
+        username: req.body.username
+      }
+    }).then(user => {
+      if(user != null) {
+        bcrypt
+          .checkPass(req.body.password, user.password)
+          .then(res => {
+            if (res.status === 200) {
+              jwt.sign({ user }, "secretkey", (err, token) => {
+                return response
+                  .status(200)
+                  .json({
+                    token,
+                    userName: user.username,
+                    isLoggedIn: res.login
+                  })
+              });
+            } else {
+              return response
+                .status(500)
+                .json({
+                  isLoggedIn: false
+                });
+            }
+          })
+          .catch(error => {
+            respose.json(error);
+          });
+      } else {
+        return response
+          .status(404)
+          .json({
+            isLoggedIn: false
+          })
+      }
+    });
+  },
   //create new user
   create(req,response) {
     bcrypt.newPass(req.body.password).then(function(res) {

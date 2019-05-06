@@ -7,6 +7,7 @@ module.exports = (app) => {
 }));
 
 // users CRUD routes
+app.post('/api/users/signin', usersController.signin);
 app.post('/api/users/create', usersController.create);
 app.get('/api/users', usersController.getAll);
 app.get('/api/users/:id', usersController.retrieve);
