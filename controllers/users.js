@@ -11,31 +11,43 @@ module.exports = {
   },
   //sign in user
   signin(req,response) {
-    db.User.findOne({
+    db.Users.findOne({
       where: {
         username: req.body.username
       }
     }).then(user => {
-      bcrypt
-        .checkPass(req.body.password, user.password)
-        .then(res => {
-          if (res.status === 200) {
-            jwt.sign({ user }, "secretkey", (err, token) => {
+      if(user != null) {
+        bcrypt
+          .checkPass(req.body.password, user.password)
+          .then(res => {
+            if (res.status === 200) {
+              jwt.sign({ user }, "secretkey", (err, token) => {
+                return response
+                  .status(200)
+                  .json({
+                    token,
+                    userName: user.username,
+                    isLoggedIn: res.login
+                  })
+              });
+            } else {
               return response
-                .status(200)
-                .json({ token })
-                .redirect("/");
-            });
-            //TODO write code for storing and checking cookies
-          } else {
-            return response
-              .status(500)
-              .json("Something went wrong");
-          }
-        })
-        .catch(error => {
-          respose.json(error);
-        });
+                .status(500)
+                .json({
+                  isLoggedIn: false
+                });
+            }
+          })
+          .catch(error => {
+            respose.json(error);
+          });
+      } else {
+        return response
+          .status(404)
+          .json({
+            isLoggedIn: false
+          })
+      }
     });
   },
   //create new user
