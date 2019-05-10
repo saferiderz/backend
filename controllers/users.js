@@ -26,6 +26,7 @@ module.exports = {
                   .status(200)
                   .json({
                     token,
+                    userId: user.id,
                     userName: user.username,
                     isLoggedIn: res.login
                   })

@@ -30,6 +30,13 @@ module.exports = (sequelize, DataTypes) => {
           min: -180, max: 180
       }
   },
+  UserId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    validate: {
+      isInt: true
+    }
+  }
 }, 
 );
 //   Issues.associate = function(models) {
