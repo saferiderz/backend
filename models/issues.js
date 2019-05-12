@@ -39,11 +39,16 @@ module.exports = (sequelize, DataTypes) => {
   }
 }, 
 );
-//   Issues.associate = function(models) {
-//     // associations can be defined here
-//     Issues.belongsTo(models.Users, {
-      
-//     })
-//   };
+  Issues.associate = function(models) {
+    // associations can be defined here
+    // an issue should belong to a user
+    // because of the foreign key constraint, 
+    // an issue can't be created without a user
+    Issues.belongsTo(models.Users, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
   return Issues;
 };
