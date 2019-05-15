@@ -26,6 +26,7 @@ module.exports = {
                   .status(200)
                   .json({
                     token,
+                    userId: user.id,
                     userName: user.username,
                     isLoggedIn: res.login
                   })
@@ -67,11 +68,11 @@ module.exports = {
                 .status(200)
                 .json({
                   token,
+                  userId: newUserData.id,
                   firstname: newUserData.firstname,
                   lastname: newUserData.lastname,
                   email: newUserData.email,
                   username: newUserData.username,
-                  password: newUserData.password
                 })
             });
           } else {

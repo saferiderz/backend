@@ -16,9 +16,8 @@ module.exports = {
       comment: req.body.comment,
       address: req.body.address,
       lat: req.body.lat,
-      lon: req.body.lon
-
-
+      lon: req.body.lon,
+      UserId: req.body.UserId
     })
       .then(issues => res.status(201).send(issues))
       .catch(error => res.status(400).send(error));
@@ -44,7 +43,8 @@ module.exports = {
       comment: req.body.comment,
       address: req.body.address,
       lat: req.body.lat,
-      lon: req.body.lon
+      lon: req.body.lon,
+      UserId: req.body.UserId
     },
       {
         where: {
