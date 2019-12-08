@@ -17,6 +17,19 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },
 
+  // Use with slider on app to get issues by date range
+  getByDateRange(req, res) {
+    db.Issues.findAll({
+      where: {
+        createdAt: {
+          [Op.gte]: moment().subtract(req.params.days, 'days').toDate()
+        }
+      }
+    })
+      .then((db) => res.json(db))
+      .catch((error) => res.status(400).send(error));
+  },
+
   // Create newIssues
   create(req, res) {
     db.Issues.create({
