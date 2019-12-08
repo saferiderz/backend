@@ -4,7 +4,7 @@ const moment = require('moment')
 
 module.exports = {
 
-  //Get all issuesf
+  //Get all issues
   getAll(req, res) {
     db.Issues.findAll({
       where: {
@@ -30,7 +30,7 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },
 
-  // Create newIssues
+  // Create new issue
   create(req, res) {
     db.Issues.create({
       issueType: req.body.issueType,
@@ -57,7 +57,7 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },
 
-  // Update a issues
+  // Update an issue by id
   update(req, res) {
     db.Issues.update({
       issueType: req.body.issueType,
@@ -79,7 +79,7 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
 
-  // Delete
+  // Delete issue by id
   destroy(req, res) {
     db.Issues.destroy({
       where: {
