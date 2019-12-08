@@ -1,15 +1,36 @@
 const db = require('../models');
+const Op = db.Sequelize.Op
+const moment = require('moment')
 
 module.exports = {
 
-  //Get all issuesf
+  //Get all issues
   getAll(req, res) {
-    db.Issues.findAll()
+    db.Issues.findAll({
+      where: {
+        createdAt: {
+          [Op.gte]: moment().subtract(30, 'days').toDate()
+        }
+      }
+    })
       .then((db) => res.json(db))
       .catch((error) => res.status(400).send(error));
   },
 
-  // Create newIssues
+  // Use with slider on app to get issues by date range
+  getByDateRange(req, res) {
+    db.Issues.findAll({
+      where: {
+        createdAt: {
+          [Op.gte]: moment().subtract(req.params.days, 'days').toDate()
+        }
+      }
+    })
+      .then((db) => res.json(db))
+      .catch((error) => res.status(400).send(error));
+  },
+
+  // Create new issue
   create(req, res) {
     db.Issues.create({
       issueType: req.body.issueType,
@@ -36,7 +57,7 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },
 
-  // Update a issues
+  // Update an issue by id
   update(req, res) {
     db.Issues.update({
       issueType: req.body.issueType,
@@ -58,7 +79,7 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
 
-  // Delete
+  // Delete issue by id
   destroy(req, res) {
     db.Issues.destroy({
       where: {

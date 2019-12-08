@@ -18,6 +18,7 @@ app.delete('/api/users/:id', usersController.destroy);
 app.post('/api/issues/create', issuesController.create);
 app.get('/api/issues', issuesController.getAll);
 app.get('/api/issues/:id', issuesController.retrieve);
+app.get('/api/issues/days/:days', issuesController.getByDateRange)
 app.put('/api/issues/:id', issuesController.update);
 app.delete('/api/issues/:id', issuesController.destroy);
 
